@@ -134,7 +134,7 @@ Process a single Stripe payment transaction.
 ### Using cURL
 
 ```bash
-curl -X POST https://localhost:5001/api/stripe/transaction \
+curl -X POST http://localhost:5000/api/stripe/transaction \
   -H "Content-Type: application/json" \
   -d '{
     "amount": 2500,
@@ -161,7 +161,7 @@ var request = new StripeTransactionRequest
 };
 
 var response = await client.PostAsJsonAsync(
-    "https://localhost:5001/api/stripe/transaction",
+    "http://localhost:5000/api/stripe/transaction",
     request
 );
 
@@ -171,7 +171,7 @@ var result = await response.Content.ReadFromJsonAsync<StripeTransactionResponse>
 ### Using JavaScript/Fetch
 
 ```javascript
-const response = await fetch('https://localhost:5001/api/stripe/transaction', {
+const response = await fetch('http://localhost:5000/api/stripe/transaction', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -215,11 +215,13 @@ app.MapStripeTransactionEndpoints()
 ## Security Considerations
 
 1. **Never expose your Stripe Secret Key** - Use environment variables or Azure Key Vault
-2. **Use HTTPS** - Always use SSL/TLS in production
+2. **Use HTTPS in Production** - This library does not enforce HTTPS redirection. Configure SSL/TLS in your host application (e.g., via reverse proxy, Azure App Service, or `app.UseHttpsRedirection()`)
 3. **Add Authentication** - Protect your endpoints with authentication
 4. **Validate Input** - The library includes basic validation, but add your own business rules
 5. **Rate Limiting** - Implement rate limiting to prevent abuse
 6. **Logging** - Add logging for audit trails and debugging
+
+**Note:** This is a minimal drop-in library. HTTPS, authentication, and rate limiting should be configured in your host application.
 
 ## Testing
 

@@ -18,7 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Note: HTTPS redirection is not included - let the host application handle HTTPS
+// If you need HTTPS, add app.UseHttpsRedirection() in your main application
 
 // Register Stripe transaction endpoints
 app.MapStripeTransactionEndpoints();
