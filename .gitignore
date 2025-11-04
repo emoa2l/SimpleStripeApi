@@ -52,3 +52,10 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Protect sensitive configuration files
+# Keep example files but exclude actual appsettings with real keys
+**/appsettings.json
+!**/appsettings.example.json
+**/appsettings.*.json
+!**/appsettings.Development.json

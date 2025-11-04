@@ -1,0 +1,117 @@
+### Health Check
+GET http://localhost:5000/health
+Accept: application/json
+
+###
+
+### Successful Payment (Test Card)
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 2000,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_visa",
+  "description": "Test payment - Visa",
+  "customerEmail": "success@example.com",
+  "metadata": {
+    "orderId": "12345",
+    "environment": "test"
+  }
+}
+
+###
+
+### Declined Card (Test)
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 1500,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_chargeDeclined",
+  "description": "Test payment - Declined",
+  "customerEmail": "declined@example.com"
+}
+
+###
+
+### Insufficient Funds (Test)
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 5000,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_chargeDeclinedInsufficientFunds",
+  "description": "Test payment - Insufficient Funds"
+}
+
+###
+
+### Invalid Request - Missing Payment Method
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 1000,
+  "currency": "usd",
+  "paymentMethodId": "",
+  "description": "This should fail validation"
+}
+
+###
+
+### Invalid Request - Zero Amount
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 0,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_visa"
+}
+
+###
+
+### Invalid Request - Negative Amount
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": -100,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_visa"
+}
+
+###
+
+### Payment with EUR Currency
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 3000,
+  "currency": "eur",
+  "paymentMethodId": "pm_card_visa",
+  "description": "Test payment - EUR",
+  "customerEmail": "eur-customer@example.com"
+}
+
+###
+
+### Large Payment Amount
+POST http://localhost:5000/api/stripe/transaction
+Content-Type: application/json
+
+{
+  "amount": 100000,
+  "currency": "usd",
+  "paymentMethodId": "pm_card_visa",
+  "description": "Large payment test - $1,000.00",
+  "customerEmail": "large@example.com",
+  "metadata": {
+    "orderType": "enterprise",
+    "priority": "high"
+  }
+}
