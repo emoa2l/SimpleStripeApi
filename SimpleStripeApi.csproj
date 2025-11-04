@@ -15,4 +15,12 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
   </ItemGroup>
 
+  <!-- Exclude test and sample projects from compilation -->
+  <ItemGroup>
+    <Compile Remove="Tests/**" />
+    <Compile Remove="TestApi/**" />
+    <None Include="Tests/**" />
+    <None Include="TestApi/**" />
+  </ItemGroup>
+
 </Project>
