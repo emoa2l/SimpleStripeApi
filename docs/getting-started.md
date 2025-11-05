@@ -27,7 +27,7 @@ Before you begin, ensure you have:
 
 1. Clone or download the SimpleStripeApi repository:
 ```bash
-git clone https://github.com/emoa2l/SimpleStripeApi.git
+git clone https://github.com/emoa2l/simple-stripe-api.git
 ```
 
 2. Add the project reference to your application:
@@ -330,6 +330,6 @@ When deploying to production:
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/emoa2l/SimpleStripeApi/issues)
+- **Issues**: [GitHub Issues](https://github.com/emoa2l/simple-stripe-api/issues)
 - **Stripe Docs**: [stripe.com/docs](https://stripe.com/docs)
 - **Stripe Support**: [support.stripe.com](https://support.stripe.com)

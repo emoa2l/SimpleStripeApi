@@ -152,11 +152,11 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/emoa2l/SimpleStripeApi/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/emoa2l/SimpleStripeApi/discussions)
+- **Issues**: [GitHub Issues](https://github.com/emoa2l/simple-stripe-api/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/emoa2l/simple-stripe-api/discussions)
 - **Stripe Docs**: [stripe.com/docs](https://stripe.com/docs)
 
 ---
 
-[Unreleased]: https://github.com/emoa2l/SimpleStripeApi/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/emoa2l/SimpleStripeApi/releases/tag/v1.0.0
+[Unreleased]: https://github.com/emoa2l/simple-stripe-api/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/emoa2l/simple-stripe-api/releases/tag/v1.0.0
