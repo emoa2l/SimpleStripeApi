@@ -2,7 +2,9 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using FluentAssertions;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Configuration;
 using SimpleStripeApi.Models;
 using Xunit;
 using Xunit.Abstractions;
@@ -22,7 +24,24 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
         WebApplicationFactory<Program> factory,
         ITestOutputHelper output)
     {
-        _client = factory.CreateClient();
+        // Configure the factory to use environment variables and configuration
+        var configuredFactory = factory.WithWebHostBuilder(builder =>
+        {
+            builder.ConfigureAppConfiguration((context, config) =>
+            {
+                // Read from environment variable if set
+                var stripeKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
+                if (!string.IsNullOrEmpty(stripeKey))
+                {
+                    config.AddInMemoryCollection(new Dictionary<string, string>
+                    {
+                        ["Stripe:SecretKey"] = stripeKey
+                    }!);
+                }
+            });
+        });
+
+        _client = configuredFactory.CreateClient();
         _output = output;
     }
 
@@ -243,6 +262,3 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
         // Test passes if the request is properly formatted
     }
 }
-
-// This class is needed for WebApplicationFactory to work
-public class Program { }
