@@ -30,7 +30,21 @@ Build and add to your local NuGet feed or private NuGet repository.
 
 ### 1. Add Configuration
 
-Add your Stripe secret key to `appsettings.json`:
+Configure your Stripe secret key using one of these methods:
+
+**Option A: Environment Variable (Recommended for production)**
+
+```bash
+# ASP.NET Core uses double underscores for hierarchical configuration
+export Stripe__SecretKey="sk_test_your_secret_key_here"
+```
+
+Or set it in your hosting environment (Azure App Service, Docker, Kubernetes, etc.):
+- Azure App Service: Add `Stripe__SecretKey` in Configuration → Application settings
+- Docker: Use `-e Stripe__SecretKey=sk_test_...`
+- Kubernetes: Set in ConfigMap or Secret
+
+**Option B: appsettings.json (For local development)**
 
 ```json
 {
@@ -40,7 +54,7 @@ Add your Stripe secret key to `appsettings.json`:
 }
 ```
 
-**Important:** Never commit your secret key to source control. Use environment variables or secure configuration providers in production.
+**Important:** Never commit your secret key to source control. The library reads from `IConfiguration`, which automatically supports both appsettings.json and environment variables.
 
 ### 2. Register Services and Routes
 
