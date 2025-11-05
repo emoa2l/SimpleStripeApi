@@ -1,9 +1,11 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using SimpleStripeApi.Models;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SimpleStripeApi.Tests;
 
@@ -14,10 +16,14 @@ namespace SimpleStripeApi.Tests;
 public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly HttpClient _client;
+    private readonly ITestOutputHelper _output;
 
-    public StripeTransactionEndpointTests(WebApplicationFactory<Program> factory)
+    public StripeTransactionEndpointTests(
+        WebApplicationFactory<Program> factory,
+        ITestOutputHelper output)
     {
         _client = factory.CreateClient();
+        _output = output;
     }
 
     [Fact]
@@ -25,6 +31,12 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
     {
         // Act
         var response = await _client.GetAsync("/health");
+        var content = await response.Content.ReadAsStringAsync();
+
+        // Log output
+        _output.WriteLine("=== Health Check Test ===");
+        _output.WriteLine($"Status Code: {response.StatusCode}");
+        _output.WriteLine($"Response: {content}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -44,6 +56,11 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
         // Act
         var response = await _client.PostAsJsonAsync("/api/stripe/transaction", request);
         var result = await response.Content.ReadFromJsonAsync<StripeTransactionResponse>();
+
+        // Log output
+        _output.WriteLine("=== Missing Payment Method Test ===");
+        _output.WriteLine($"Status Code: {response.StatusCode}");
+        _output.WriteLine($"Response: {JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true })}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -66,6 +83,11 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
         // Act
         var response = await _client.PostAsJsonAsync("/api/stripe/transaction", request);
         var result = await response.Content.ReadFromJsonAsync<StripeTransactionResponse>();
+
+        // Log output
+        _output.WriteLine("=== Zero Amount Test ===");
+        _output.WriteLine($"Status Code: {response.StatusCode}");
+        _output.WriteLine($"Response: {JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true })}");
 
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
@@ -136,9 +158,16 @@ public class StripeTransactionEndpointTests : IClassFixture<WebApplicationFactor
             }
         };
 
+        _output.WriteLine("=== Valid Test Card Payment Test ===");
+        _output.WriteLine($"Request: {JsonSerializer.Serialize(request, new JsonSerializerOptions { WriteIndented = true })}");
+
         // Act
         var response = await _client.PostAsJsonAsync("/api/stripe/transaction", request);
         var result = await response.Content.ReadFromJsonAsync<StripeTransactionResponse>();
+
+        // Log output
+        _output.WriteLine($"Status Code: {response.StatusCode}");
+        _output.WriteLine($"Response: {JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true })}");
 
         // Assert
         result.Should().NotBeNull();
