@@ -1,4 +1,4 @@
-# SimpleStripeApi
+# SimpleStripeApi - Drop-in Stripe Payment Processing for .NET 8+
 
 A simple, drop-in Stripe payment processing API for .NET 8+ projects. This library provides a self-registering route for handling Stripe transactions asynchronously with JSON input/output.
 
