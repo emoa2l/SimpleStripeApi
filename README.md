@@ -1,6 +1,7 @@
 # SimpleStripeApi - Drop-in Stripe Payment Processing for .NET 8+
 
-A simple, drop-in Stripe payment processing API for .NET 8+ projects. This library provides a self-registering route for handling Stripe transactions asynchronously with JSON input/output.
+SimpleStripeApi is a lightweight Stripe payment integration library for .NET 8+ and C# applications. Perfect for adding Stripe checkout, payment processing, and transaction handling to ASP.NET Core projects with minimal configuration. This drop-in API uses async/await patterns and the official Stripe.net SDK for reliable payment processing.
+
 
 ## Features
 
@@ -10,6 +11,14 @@ A simple, drop-in Stripe payment processing API for .NET 8+ projects. This libra
 - ✅ Built on Stripe.net SDK
 - ✅ Minimal configuration required
 - ✅ Easy to drop into existing .NET projects
+
+## Use Cases
+
+- **E-commerce checkout** - Process credit card payments in your .NET online store
+- **SaaS billing** - Handle subscription payments for .NET web applications
+- **Donation platforms** - Accept one-time payments in C# charity/fundraising apps
+- **Marketplace payments** - Integrate Stripe into .NET marketplace platforms
+- **API-based payments** - Add payment endpoints to existing ASP.NET Core APIs
 
 ## Installation
 
