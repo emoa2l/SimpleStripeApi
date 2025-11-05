@@ -3,344 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SimpleStripeApi - Stripe Payment API for .NET 8+ | C# Integration</title>
-    <meta name="description" content="Open-source drop-in Stripe payment processing library for .NET 8+ and C#. Easy async transaction handling for ASP.NET Core applications with minimal configuration.">
-    <meta name="keywords" content="Stripe .NET, Stripe C#, payment API .NET, Stripe integration, ASP.NET Core payments, Stripe.net, payment processing C#">
-
-    <!-- Open Graph for social sharing -->
-    <meta property="og:title" content="SimpleStripeApi - Stripe Payment API for .NET 8+">
-    <meta property="og:description" content="Drop-in Stripe payment processing for C# applications">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://emoa2l.github.io/SimpleStripeApi/">
-
+    <title>SimpleStripeApi</title>
+    <meta name="description" content="Stripe payment processing library for .NET 8+">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: monospace;
             line-height: 1.6;
-            color: #1a1a1a;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            color: #333;
         }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .tagline {
-            font-size: 1.3em;
-            opacity: 0.95;
-            font-weight: 300;
-        }
-
-        .content {
-            padding: 40px;
-        }
-
-        h2 {
-            color: #667eea;
-            margin: 30px 0 15px 0;
-            font-size: 2em;
-            font-weight: 600;
-        }
-
-        h3 {
-            color: #764ba2;
-            margin: 20px 0 10px 0;
-            font-size: 1.4em;
-        }
-
-        p {
-            margin-bottom: 15px;
-            color: #4a4a4a;
-        }
-
-        .cta {
-            display: inline-block;
-            background: #667eea;
-            color: white;
-            padding: 15px 35px;
-            text-decoration: none;
-            border-radius: 8px;
-            margin: 20px 10px 20px 0;
-            font-weight: 600;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .cta:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
-        }
-
-        .cta.secondary {
-            background: #764ba2;
-            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
-        }
-
-        .cta.secondary:hover {
-            background: #643d8a;
-            box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
-        }
-
-        ul {
-            margin: 15px 0 15px 30px;
-            color: #4a4a4a;
-        }
-
-        li {
-            margin: 8px 0;
-        }
-
-        code {
-            background: #f4f4f4;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            color: #d63384;
-        }
-
-        pre {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 15px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9em;
-            line-height: 1.5;
-        }
-
-        pre code {
-            background: transparent;
-            color: inherit;
-            padding: 0;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .feature-box {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-        }
-
-        .feature-box h3 {
-            margin-top: 0;
-            color: #667eea;
-            font-size: 1.2em;
-        }
-
-        footer {
-            background: #f8f9fa;
-            padding: 30px 40px;
-            text-align: center;
-            color: #6c757d;
-            font-size: 0.9em;
-        }
-
-        .badges {
-            margin: 20px 0;
-        }
-
-        .badges img {
-            margin: 5px;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .tagline {
-                font-size: 1.1em;
-            }
-
-            .content {
-                padding: 20px;
-            }
-
-            header {
-                padding: 40px 20px;
-            }
-        }
+        h1 { font-size: 1.8em; margin-bottom: 0.2em; }
+        h2 { font-size: 1.3em; margin-top: 2em; border-bottom: 1px solid #ccc; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+        a { color: #0066cc; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>SimpleStripeApi</h1>
-            <p class="tagline">Drop-in Stripe payment processing for .NET 8+ applications</p>
-            <div class="badges">
-                <img src="https://img.shields.io/badge/.NET-8.0+-512BD4?style=flat-square&logo=dotnet" alt=".NET 8.0+">
-                <img src="https://img.shields.io/badge/Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white" alt="Stripe">
-                <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License">
-            </div>
-        </header>
+    <h1>SimpleStripeApi</h1>
+    <p>Stripe payment processing library for .NET 8+</p>
 
-        <div class="content">
-            <p><strong>SimpleStripeApi</strong> is an open-source library that makes it easy to integrate Stripe payments into your C# and ASP.NET Core projects. With just a few lines of code, you can start processing credit card payments, handling transactions asynchronously, and building payment features into your .NET applications.</p>
+    <p>
+        <a href="https://github.com/emoa2l/SimpleStripeApi">GitHub</a> |
+        <a href="https://github.com/emoa2l/SimpleStripeApi/blob/main/README.md">Documentation</a> |
+        <a href="https://github.com/emoa2l/SimpleStripeApi/blob/main/LICENSE">License</a>
+    </p>
 
-            <a href="https://github.com/emoa2l/SimpleStripeApi" class="cta">View on GitHub</a>
-            <a href="https://github.com/emoa2l/SimpleStripeApi#quick-start" class="cta secondary">Get Started</a>
+    <h2>Installation</h2>
+    <pre>dotnet add reference path/to/SimpleStripeApi/SimpleStripeApi.csproj</pre>
 
-            <h2>Why Choose SimpleStripeApi?</h2>
+    <h2>Usage</h2>
+    <pre>builder.Services.AddStripeTransactionService();
+app.MapStripeTransactionEndpoints();</pre>
 
-            <div class="features">
-                <div class="feature-box">
-                    <h3>⚡ Simple Integration</h3>
-                    <p>Add to any .NET 8+ project in minutes with just two lines of code</p>
-                </div>
+    <h2>Features</h2>
+    <ul>
+        <li>Single endpoint for payment processing</li>
+        <li>Async transaction handling</li>
+        <li>JSON request/response</li>
+        <li>Built on Stripe.net SDK</li>
+        <li>Minimal configuration required</li>
+    </ul>
 
-                <div class="feature-box">
-                    <h3>🚀 Async by Default</h3>
-                    <p>Built for modern async/await patterns with full cancellation support</p>
-                </div>
+    <h2>Requirements</h2>
+    <ul>
+        <li>.NET 8.0+</li>
+        <li>Stripe.net v45.9.0+</li>
+        <li>Stripe API key</li>
+    </ul>
 
-                <div class="feature-box">
-                    <h3>📦 JSON API</h3>
-                    <p>Clean REST endpoints with JSON input/output and OpenAPI support</p>
-                </div>
-
-                <div class="feature-box">
-                    <h3>🔒 Stripe.net SDK</h3>
-                    <p>Built on official Stripe library with automatic updates</p>
-                </div>
-
-                <div class="feature-box">
-                    <h3>⚙️ Minimal Config</h3>
-                    <p>Just add your API key and go - no complex setup required</p>
-                </div>
-
-                <div class="feature-box">
-                    <h3>🧪 Test Ready</h3>
-                    <p>Comprehensive test suite and utilities included out of the box</p>
-                </div>
-            </div>
-
-            <h2>Quick Start</h2>
-            <pre><code>// Install via NuGet or project reference
-dotnet add reference SimpleStripeApi
-
-// In Program.cs
-builder.Services.AddStripeTransactionService();
-app.MapStripeTransactionEndpoints();
-
-// That's it! Process payments at /api/stripe/transaction</code></pre>
-
-            <h3>Example Payment Request</h3>
-            <pre><code>POST /api/stripe/transaction
-Content-Type: application/json
-
+    <h2>Example</h2>
+    <pre>POST /api/stripe/transaction
 {
   "amount": 2500,
   "currency": "usd",
-  "paymentMethodId": "pm_card_visa",
-  "description": "Order #12345",
-  "customerEmail": "customer@example.com",
-  "metadata": {
-    "orderId": "12345"
-  }
-}</code></pre>
+  "paymentMethodId": "pm_card_visa"
+}</pre>
 
-            <h2>Perfect For</h2>
-            <ul>
-                <li><strong>E-commerce checkout systems</strong> built with C# and ASP.NET Core</li>
-                <li><strong>SaaS subscription billing</strong> with .NET backend</li>
-                <li><strong>Payment processing</strong> in ASP.NET Core Web APIs</li>
-                <li><strong>Donation platforms</strong> and crowdfunding apps</li>
-                <li><strong>Any C# application</strong> that needs Stripe integration</li>
-            </ul>
-
-            <h2>Key Features</h2>
-            <ul>
-                <li>✅ Single transaction per request with async processing</li>
-                <li>✅ JSON-only input and output for easy integration</li>
-                <li>✅ Self-registering routes via extension methods</li>
-                <li>✅ Customizable route prefix (default: /api/stripe/transaction)</li>
-                <li>✅ Built-in request validation</li>
-                <li>✅ Comprehensive error handling</li>
-                <li>✅ Metadata support for custom tracking</li>
-                <li>✅ Customer email receipts</li>
-                <li>✅ Swagger/OpenAPI integration</li>
-                <li>✅ XUnit integration tests included</li>
-            </ul>
-
-            <h2>Documentation</h2>
-            <ul>
-                <li><a href="https://github.com/emoa2l/SimpleStripeApi#quick-start">Getting Started Guide</a></li>
-                <li><a href="https://github.com/emoa2l/SimpleStripeApi#api-endpoint">API Reference</a></li>
-                <li><a href="https://github.com/emoa2l/SimpleStripeApi#example-usage">Code Examples</a></li>
-                <li><a href="https://github.com/emoa2l/SimpleStripeApi#testing">Testing Guide</a></li>
-                <li><a href="https://github.com/emoa2l/SimpleStripeApi#configuration-options">Configuration Options</a></li>
-            </ul>
-
-            <h2>Requirements</h2>
-            <ul>
-                <li>.NET 8.0 or later</li>
-                <li>Stripe.net v45.9.0+</li>
-                <li>A Stripe account (free test mode available)</li>
-            </ul>
-
-            <h2>Open Source & Free</h2>
-            <p>SimpleStripeApi is MIT licensed and completely free to use in your projects. Contributions, issues, and feature requests are welcome!</p>
-
-            <a href="https://github.com/emoa2l/SimpleStripeApi" class="cta">Star on GitHub</a>
-            <a href="https://github.com/emoa2l/SimpleStripeApi/issues" class="cta secondary">Report an Issue</a>
-        </div>
-
-        <footer>
-            <p><strong>SimpleStripeApi</strong> - Open Source Stripe Integration for .NET</p>
-            <p>Created by <a href="https://github.com/emoa2l">@emoa2l</a> | <a href="https://github.com/emoa2l/SimpleStripeApi/blob/main/LICENSE">MIT License</a></p>
-            <p style="margin-top: 15px; font-size: 0.85em; color: #999;">
-                <em>Keywords: Stripe .NET integration, payment processing C#, Stripe API for ASP.NET Core, .NET 8 payment library,
-                Stripe checkout C#, async payment processing .NET, Stripe.net wrapper, payment gateway .NET,
-                credit card processing C#, Stripe minimal API</em>
-            </p>
-        </footer>
-    </div>
+    <hr>
+    <p><small>MIT License | <a href="https://github.com/emoa2l">@emoa2l</a></small></p>
 </body>
 </html>
